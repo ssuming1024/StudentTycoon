@@ -160,4 +160,14 @@ public class CustomizeController : MonoBehaviour
             FinalClothList[clothIndex].gameObject.SetActive(true);
         }
     }
+
+    public void SaveCustomData()
+    {
+        PlayerPrefs.SetInt("HAIR_INDEX", hairIndex);
+        PlayerPrefs.SetInt("COLOR_INDEX", colorIndex);
+        PlayerPrefs.SetInt("CLOTH_INDEX", clothIndex);
+
+        //Sample
+        hairIndex = PlayerPrefs.GetInt("HAIR_INDEX");
+    }
 }
