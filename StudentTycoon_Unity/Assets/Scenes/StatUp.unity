@@ -4873,7 +4873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50eb07e789399ff4b9a59b9d5f1ebb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BackSceneButton
-  backSceneName: PlayGame
+  backSceneName: StatUp_UI
 --- !u!4 &1721235596
 Transform:
   m_ObjectHideFlags: 0

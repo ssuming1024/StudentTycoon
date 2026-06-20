@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Collections.Generic;
 
 public class OXQuizManager : MonoBehaviour
 {
@@ -16,6 +17,18 @@ public class OXQuizManager : MonoBehaviour
         Science,
         Music
     }
+
+    public List<string> questionList = new List<string>();
+    public List<bool> answerList = new List<bool>();
+
+
+    public List<string> inputQuestionList = new List<string>();
+    public List<string> inputAnswerList = new List<string>();
+    string answer = string.Empty;
+
+    public TMP_Text questionText;
+
+    public TMP_InputField answerInput;
 
     [Header("문제 과목")]
     [SerializeField] private Subject subject = Subject.Math;
@@ -42,6 +55,43 @@ public class OXQuizManager : MonoBehaviour
     public void ChooseX()
     {
         CheckAnswer(false);
+    }
+
+    public void SubmitAnswer()
+    {
+        if(answer == answerInput.text)
+        {
+            //정답처리
+        }
+        else
+        {
+            // 오답처리
+        }
+    }
+
+    public void MakeQuestion()
+    {
+        int typeIndex = Random.Range(0, 2);
+        if (typeIndex == 0)
+        {
+            // OX 퀴즈
+
+            int qIndex = Random.Range(0, questionList.Count);
+            questionText.text = questionList[qIndex];
+            correctAnswerIsO = answerList[qIndex];
+        }
+        else
+        {
+            // 주관식 퀴즈
+            int qInputIndex = Random.Range(0, inputQuestionList.Count);
+            questionText.text = inputQuestionList[qInputIndex];
+            answer = inputAnswerList[qInputIndex];
+        }
+    }
+
+    private void Start()
+    {
+        MakeQuestion();
     }
 
     private void CheckAnswer(bool playerAnswerIsO)
