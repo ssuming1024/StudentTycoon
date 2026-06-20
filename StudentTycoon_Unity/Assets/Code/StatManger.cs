@@ -82,22 +82,36 @@ public class StatManager : MonoBehaviour
 
     private void LoadSavedStats()
     {
-        programming = PlayerPrefs.GetInt("Programming", 0);
-        korean = PlayerPrefs.GetInt("Korean", 0);
-        math = PlayerPrefs.GetInt("Math", 0);
-        society = PlayerPrefs.GetInt("Society", 0);
-        art = PlayerPrefs.GetInt("Art", 0);
-        health = PlayerPrefs.GetInt("Health", 0);
-        science = PlayerPrefs.GetInt("Science", 0);
-        music = PlayerPrefs.GetInt("Music", 0);
+        programming = LoadClampedStat("Programming");
+        korean = LoadClampedStat("Korean");
+        math = LoadClampedStat("Math");
+        society = LoadClampedStat("Society");
+        art = LoadClampedStat("Art");
+        health = LoadClampedStat("Health");
+        science = LoadClampedStat("Science");
+        music = LoadClampedStat("Music");
+    }
+
+    private int LoadClampedStat(string key)
+    {
+        int savedValue = PlayerPrefs.GetInt(key, 0);
+        int clampedValue = Mathf.Clamp(savedValue, 0, barMaxValue);
+
+        if (savedValue != clampedValue)
+        {
+            PlayerPrefs.SetInt(key, clampedValue);
+            PlayerPrefs.Save();
+        }
+
+        return clampedValue;
     }
 
     private IEnumerator ShowIncreaseAnimation()
     {
         string subject = PlayerPrefs.GetString("LastSubject", "");
-        int beforeStat = PlayerPrefs.GetInt("LastBeforeStat", 0);
-        int addValue = PlayerPrefs.GetInt("LastAddValue", 0);
-        int afterStat = PlayerPrefs.GetInt("LastAfterStat", 0);
+        int beforeStat = Mathf.Clamp(PlayerPrefs.GetInt("LastBeforeStat", 0), 0, barMaxValue);
+        int afterStat = Mathf.Clamp(PlayerPrefs.GetInt("LastAfterStat", 0), 0, barMaxValue);
+        int addValue = afterStat - beforeStat;
 
         SetStatValue(subject, beforeStat);
         UpdateUI();
@@ -138,6 +152,8 @@ public class StatManager : MonoBehaviour
 
     private void SetStatValue(string subject, int value)
     {
+        value = Mathf.Clamp(value, 0, barMaxValue);
+
         switch (subject)
         {
             case "Programming":
@@ -206,9 +222,11 @@ public class StatManager : MonoBehaviour
 
     private void UpdateStat(Slider slider, TMP_Text text, int value)
     {
+        value = Mathf.Clamp(value, 0, barMaxValue);
+
         if (slider != null)
         {
-            slider.maxValue = Mathf.Max(barMaxValue, value);
+            slider.maxValue = barMaxValue;
             slider.value = value;
         }
 

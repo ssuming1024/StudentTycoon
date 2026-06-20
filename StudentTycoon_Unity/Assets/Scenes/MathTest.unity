@@ -155,8 +155,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 198, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 160, y: 0}
+  m_SizeDelta: {x: 160, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &11580911
 MonoBehaviour:
@@ -201,7 +201,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11580912}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 631703525}
+        m_TargetAssemblyTypeName: OXQuizManager, Assembly-CSharp
+        m_MethodName: SubmitAnswer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &11580912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,10 +309,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC81C\uCD9C\uCC3D"
+  m_text: "\uC81C\uCD9C"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 82062379cf906644a9339e147cfeb7f6, type: 2}
+  m_sharedMaterial: {fileID: 3751569357295454754, guid: 82062379cf906644a9339e147cfeb7f6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -324,8 +336,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -414,20 +426,78 @@ MonoBehaviour:
   - 
   answerList: 0100000000
   inputQuestionList:
-  - "10 + 5 \uB294?"
-  - "2 + 3\uC740? "
-  - 
+  - 10 + 5 = ?
+  - 2 + 3 = ?
+  - 7 + 8 = ?
+  - 12 - 4 = ?
+  - 9 - 6 = ?
+  - 6 * 3 = ?
+  - 4 * 7 = ?
+  - 20 / 4 = ?
+  - 18 / 3 = ?
+  - 15 + 9 = ?
+  - 30 - 12 = ?
+  - 8 * 8 = ?
+  - 45 / 5 = ?
+  - 11 + 13 = ?
+  - 25 - 7 = ?
+  - 3 * 9 = ?
+  - 36 / 6 = ?
+  - 14 + 6 = ?
+  - 50 - 19 = ?
+  - 5 * 12 = ?
+  - 72 / 8 = ?
+  - 16 + 17 = ?
+  - 40 - 15 = ?
+  - 9 * 7 = ?
+  - 81 / 9 = ?
+  - 13 + 29 = ?
+  - 100 - 37 = ?
+  - 6 * 11 = ?
+  - 96 / 12 = ?
+  - 24 + 18 = ?
   inputAnswerList:
   - 15
   - 5
-  - 
+  - 15
+  - 8
+  - 3
+  - 18
+  - 28
+  - 5
+  - 6
+  - 24
+  - 18
+  - 64
+  - 9
+  - 24
+  - 18
+  - 27
+  - 6
+  - 20
+  - 31
+  - 60
+  - 9
+  - 33
+  - 25
+  - 63
+  - 9
+  - 42
+  - 63
+  - 66
+  - 8
+  - 42
   questionText: {fileID: 1696186793}
   answerInput: {fileID: 2003205095}
+  oButtonObject: {fileID: 1909507779}
+  xButtonObject: {fileID: 1643689030}
+  submitButtonObject: {fileID: 11580909}
   subject: 2
   correctAnswerIsO: 1
   resultText: {fileID: 0}
   statSceneName: StatUp
   mainSceneName: PlayGame
+  maxStatValue: 20
 --- !u!4 &631703526
 Transform:
   m_ObjectHideFlags: 0
@@ -870,8 +940,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1135,8 +1205,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1408,9 +1478,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1876685140}
-        m_TargetAssemblyTypeName: BackToMain, Assembly-CSharp
-        m_MethodName: GoMain
+      - m_Target: {fileID: 631703525}
+        m_TargetAssemblyTypeName: OXQuizManager, Assembly-CSharp
+        m_MethodName: ChooseX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1809,8 +1879,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -90, y: 0}
+  m_SizeDelta: {x: 280, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2003205095
 MonoBehaviour:
