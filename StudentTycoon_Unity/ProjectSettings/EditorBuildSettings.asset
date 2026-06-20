@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Start.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scenes/DecoratePlayer.unity
+    path: Assets/Scenes/PlayGame.unity
     guid: 4c89326fb77fb114d867b36840606b0e
   - enabled: 1
     path: Assets/Scenes/Ending_0.unity
