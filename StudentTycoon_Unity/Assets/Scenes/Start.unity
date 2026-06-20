@@ -664,7 +664,7 @@ MonoBehaviour:
   m_text: "\uBA38\uB9AC \uC0C9"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 82062379cf906644a9339e147cfeb7f6, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: ceb36b16ef23476419d497ee017e036f, type: 2}
+  m_sharedMaterial: {fileID: 3751569357295454754, guid: 82062379cf906644a9339e147cfeb7f6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1199,7 +1199,7 @@ MonoBehaviour:
   m_text: "\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 82062379cf906644a9339e147cfeb7f6, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: ceb36b16ef23476419d497ee017e036f, type: 2}
+  m_sharedMaterial: {fileID: 3751569357295454754, guid: 82062379cf906644a9339e147cfeb7f6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3626,7 +3626,7 @@ MonoBehaviour:
   m_text: "\uC637"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 82062379cf906644a9339e147cfeb7f6, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: ceb36b16ef23476419d497ee017e036f, type: 2}
+  m_sharedMaterial: {fileID: 3751569357295454754, guid: 82062379cf906644a9339e147cfeb7f6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3822,8 +3822,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b0b08a80908d149926f7a13f4fead3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadScene
-  yesSceneName: StatUp
-  noSceneName: StatUp
+  yesSceneName: MathTest
+  noSceneName: MathTest
 --- !u!1 &1280990360
 GameObject:
   m_ObjectHideFlags: 0
@@ -4459,7 +4459,7 @@ MonoBehaviour:
   m_text: "\uBA38\uB9AC"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 82062379cf906644a9339e147cfeb7f6, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: ceb36b16ef23476419d497ee017e036f, type: 2}
+  m_sharedMaterial: {fileID: 3751569357295454754, guid: 82062379cf906644a9339e147cfeb7f6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4629,7 +4629,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1454767540
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6259,7 +6259,7 @@ MonoBehaviour:
   m_text: "\uC774\uB984\uC744 \uC785\uB825\uD558\uC138\uC694"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 82062379cf906644a9339e147cfeb7f6, type: 2}
-  m_sharedMaterial: {fileID: 3221136728576762039, guid: 82062379cf906644a9339e147cfeb7f6, type: 2}
+  m_sharedMaterial: {fileID: 3751569357295454754, guid: 82062379cf906644a9339e147cfeb7f6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
