@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Ending_2.unity
     guid: 71db815aca3592d49a26fab7cb61a35c
   - enabled: 1
-    path: Assets/Scenes/Ending_3.unity
+    path: Assets/Scenes/MathTest.unity
     guid: 83694cef17965154b8409f85b16361bd
   - enabled: 1
     path: Assets/Scenes/Ending_4.unity

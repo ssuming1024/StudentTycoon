@@ -1,14 +1,12 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class StatManager : MonoBehaviour
 {
-    [Header("남은 스탯")]
-    [SerializeField] private int remainStat = 35;
-
-    [Header("각 능력치 최대치")]
-    [SerializeField] private int maxEachStat = 10;
+    [Header("바 표시 기준값")]
+    [SerializeField] private int barMaxValue = 20;
 
     [Header("능력치 값")]
     [SerializeField] private int programming = 0;
@@ -19,10 +17,6 @@ public class StatManager : MonoBehaviour
     [SerializeField] private int health = 0;
     [SerializeField] private int science = 0;
     [SerializeField] private int music = 0;
-
-    [Header("남은 스탯 UI")]
-    [SerializeField] private Slider remainStatBar;
-    [SerializeField] private TMP_Text remainStatText;
 
     [Header("능력치 바 UI")]
     [SerializeField] private Slider programmingBar;
@@ -44,128 +38,183 @@ public class StatManager : MonoBehaviour
     [SerializeField] private TMP_Text scienceText;
     [SerializeField] private TMP_Text musicText;
 
+    [Header("증가 결과 표시 Text")]
+    [SerializeField] private TMP_Text resultText;
+
     private void Start()
     {
         SetSliderMaxValue();
-        UpdateUI();
+        LoadSavedStats();
+
+        if (PlayerPrefs.GetInt("LastQuizCorrect", 0) == 1)
+        {
+            StartCoroutine(ShowIncreaseAnimation());
+        }
+        else
+        {
+            UpdateUI();
+        }
     }
 
     private void SetSliderMaxValue()
     {
-        remainStatBar.maxValue = 35;
-        remainStatBar.minValue = 0;
-
-        programmingBar.maxValue = maxEachStat;
-        koreanBar.maxValue = maxEachStat;
-        mathBar.maxValue = maxEachStat;
-        societyBar.maxValue = maxEachStat;
-        artBar.maxValue = maxEachStat;
-        healthBar.maxValue = maxEachStat;
-        scienceBar.maxValue = maxEachStat;
-        musicBar.maxValue = maxEachStat;
+        SetSlider(programmingBar);
+        SetSlider(koreanBar);
+        SetSlider(mathBar);
+        SetSlider(societyBar);
+        SetSlider(artBar);
+        SetSlider(healthBar);
+        SetSlider(scienceBar);
+        SetSlider(musicBar);
     }
 
-    public void AddProgrammingStat()
+    private void SetSlider(Slider slider)
     {
-        if (remainStat > 0 && programming < maxEachStat)
+        if (slider == null)
         {
-            programming++;
-            remainStat--;
+            return;
+        }
+
+        slider.minValue = 0;
+        slider.maxValue = barMaxValue;
+        slider.wholeNumbers = false;
+    }
+
+    private void LoadSavedStats()
+    {
+        programming = PlayerPrefs.GetInt("Programming", 0);
+        korean = PlayerPrefs.GetInt("Korean", 0);
+        math = PlayerPrefs.GetInt("Math", 0);
+        society = PlayerPrefs.GetInt("Society", 0);
+        art = PlayerPrefs.GetInt("Art", 0);
+        health = PlayerPrefs.GetInt("Health", 0);
+        science = PlayerPrefs.GetInt("Science", 0);
+        music = PlayerPrefs.GetInt("Music", 0);
+    }
+
+    private IEnumerator ShowIncreaseAnimation()
+    {
+        string subject = PlayerPrefs.GetString("LastSubject", "");
+        int beforeStat = PlayerPrefs.GetInt("LastBeforeStat", 0);
+        int addValue = PlayerPrefs.GetInt("LastAddValue", 0);
+        int afterStat = PlayerPrefs.GetInt("LastAfterStat", 0);
+
+        SetStatValue(subject, beforeStat);
+        UpdateUI();
+
+        if (resultText != null)
+        {
+            resultText.text = GetKoreanSubjectName(subject) + " +" + addValue + "  (" + beforeStat + " → " + afterStat + ")";
+        }
+
+        yield return new WaitForSeconds(0.3f);
+
+        float timer = 0f;
+        float duration = 0.8f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            float t = timer / duration;
+
+            int currentValue = Mathf.RoundToInt(Mathf.Lerp(beforeStat, afterStat, t));
+
+            SetStatValue(subject, currentValue);
             UpdateUI();
+
+            yield return null;
+        }
+
+        SetStatValue(subject, afterStat);
+        UpdateUI();
+
+        PlayerPrefs.DeleteKey("LastQuizCorrect");
+        PlayerPrefs.DeleteKey("LastSubject");
+        PlayerPrefs.DeleteKey("LastBeforeStat");
+        PlayerPrefs.DeleteKey("LastAddValue");
+        PlayerPrefs.DeleteKey("LastAfterStat");
+        PlayerPrefs.Save();
+    }
+
+    private void SetStatValue(string subject, int value)
+    {
+        switch (subject)
+        {
+            case "Programming":
+                programming = value;
+                break;
+            case "Korean":
+                korean = value;
+                break;
+            case "Math":
+                math = value;
+                break;
+            case "Society":
+                society = value;
+                break;
+            case "Art":
+                art = value;
+                break;
+            case "Health":
+                health = value;
+                break;
+            case "Science":
+                science = value;
+                break;
+            case "Music":
+                music = value;
+                break;
         }
     }
 
-    public void AddKoreanStat()
+    private string GetKoreanSubjectName(string subject)
     {
-        if (remainStat > 0 && korean < maxEachStat)
+        switch (subject)
         {
-            korean++;
-            remainStat--;
-            UpdateUI();
-        }
-    }
-
-    public void AddMathStat()
-    {
-        if (remainStat > 0 && math < maxEachStat)
-        {
-            math++;
-            remainStat--;
-            UpdateUI();
-        }
-    }
-
-    public void AddSocietyStat()
-    {
-        if (remainStat > 0 && society < maxEachStat)
-        {
-            society++;
-            remainStat--;
-            UpdateUI();
-        }
-    }
-
-    public void AddArtStat()
-    {
-        if (remainStat > 0 && art < maxEachStat)
-        {
-            art++;
-            remainStat--;
-            UpdateUI();
-        }
-    }
-
-    public void AddHealthStat()
-    {
-        if (remainStat > 0 && health < maxEachStat)
-        {
-            health++;
-            remainStat--;
-            UpdateUI();
-        }
-    }
-
-    public void AddScienceStat()
-    {
-        if (remainStat > 0 && science < maxEachStat)
-        {
-            science++;
-            remainStat--;
-            UpdateUI();
-        }
-    }
-
-    public void AddMusicStat()
-    {
-        if (remainStat > 0 && music < maxEachStat)
-        {
-            music++;
-            remainStat--;
-            UpdateUI();
+            case "Programming":
+                return "프로그래밍";
+            case "Korean":
+                return "국어";
+            case "Math":
+                return "수학";
+            case "Society":
+                return "사회";
+            case "Art":
+                return "미술";
+            case "Health":
+                return "체육";
+            case "Science":
+                return "과학";
+            case "Music":
+                return "음악";
+            default:
+                return "능력치";
         }
     }
 
     private void UpdateUI()
     {
-        remainStatBar.value = remainStat;
-        remainStatText.text = "최대 스탯 : " + remainStat;
+        UpdateStat(programmingBar, programmingText, programming);
+        UpdateStat(koreanBar, koreanText, korean);
+        UpdateStat(mathBar, mathText, math);
+        UpdateStat(societyBar, societyText, society);
+        UpdateStat(artBar, artText, art);
+        UpdateStat(healthBar, healthText, health);
+        UpdateStat(scienceBar, scienceText, science);
+        UpdateStat(musicBar, musicText, music);
+    }
 
-        programmingBar.value = programming;
-        koreanBar.value = korean;
-        mathBar.value = math;
-        societyBar.value = society;
-        artBar.value = art;
-        healthBar.value = health;
-        scienceBar.value = science;
-        musicBar.value = music;
+    private void UpdateStat(Slider slider, TMP_Text text, int value)
+    {
+        if (slider != null)
+        {
+            slider.maxValue = Mathf.Max(barMaxValue, value);
+            slider.value = value;
+        }
 
-        programmingText.text = programming.ToString();
-        koreanText.text = korean.ToString();
-        mathText.text = math.ToString();
-        societyText.text = society.ToString();
-        artText.text = art.ToString();
-        healthText.text = health.ToString();
-        scienceText.text = science.ToString();
-        musicText.text = music.ToString();
+        if (text != null)
+        {
+            text.text = value.ToString();
+        }
     }
 }
