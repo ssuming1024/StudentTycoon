@@ -257,6 +257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WrongAnswerSceneController
   returnSceneName: StatUp_UI
   autoReturnDelay: 1.5
+  messageFont: {fileID: 11400000, guid: 82062379cf906644a9339e147cfeb7f6, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

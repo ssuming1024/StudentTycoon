@@ -8,6 +8,7 @@ public class WrongAnswerSceneController : MonoBehaviour
 {
     [SerializeField] private string returnSceneName = "StatUp_UI";
     [SerializeField] private float autoReturnDelay = 1.5f;
+    [SerializeField] private TMP_FontAsset messageFont;
 
     private void Start()
     {
@@ -47,6 +48,11 @@ public class WrongAnswerSceneController : MonoBehaviour
         textObject.transform.SetParent(parent, false);
 
         TMP_Text tmpText = textObject.AddComponent<TextMeshProUGUI>();
+        if (messageFont != null)
+        {
+            tmpText.font = messageFont;
+        }
+
         tmpText.text = text;
         tmpText.fontSize = fontSize;
         tmpText.alignment = TextAlignmentOptions.Center;
