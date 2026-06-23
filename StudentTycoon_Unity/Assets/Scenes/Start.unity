@@ -2243,17 +2243,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1275352280}
-        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-        m_MethodName: ChooseAnswer
-        m_Mode: 6
+      - m_Target: {fileID: 1454767544}
+        m_TargetAssemblyTypeName: CustomizationManager, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &829860619
 MonoBehaviour:
@@ -4667,6 +4667,7 @@ GameObject:
   - component: {fileID: 1454767542}
   - component: {fileID: 1454767541}
   - component: {fileID: 1454767543}
+  - component: {fileID: 1454767544}
   m_Layer: 5
   m_Name: CustomizePanel
   m_TagString: Untagged
@@ -4799,6 +4800,29 @@ MonoBehaviour:
   - {fileID: 824039630}
   - {fileID: 1363754099}
   - {fileID: 1767033050}
+--- !u!114 &1454767544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454767539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f15e03670f64b54a991a71293a1b6ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomizationManager
+  nextSceneName: StatUp_UI
+  nameInput: {fileID: 193835535}
+  legacyCustomizeController: {fileID: 1454767543}
+  hairImage: {fileID: 1280990362}
+  clothesImage: {fileID: 1581406190}
+  hairSprites: []
+  clothesSprites: []
+  hairColors: []
+  hairIndex: 0
+  hairColorIndex: 0
+  clothesIndex: 0
 --- !u!1 &1485999506
 GameObject:
   m_ObjectHideFlags: 0

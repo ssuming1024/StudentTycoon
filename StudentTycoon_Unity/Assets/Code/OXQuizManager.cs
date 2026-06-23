@@ -46,8 +46,8 @@ public class OXQuizManager : MonoBehaviour
     [Header("정답이면 이동할 스탯 화면 씬 이름")]
     [SerializeField] private string statSceneName = "DecoratePlayer";
 
-    [Header("오답이면 이동할 메인 화면 씬 이름")]
-    [SerializeField] private string mainSceneName = "PlayGame";
+    [Header("오답이면 이동할 화면 씬 이름")]
+    [SerializeField] private string mainSceneName = "WrongAnswer";
 
     [Header("능력치 최대값")]
     [SerializeField] private int maxStatValue = 20;
@@ -265,7 +265,9 @@ public class OXQuizManager : MonoBehaviour
 
     private string NormalizeAnswer(string value)
     {
-        return value.Trim();
+        return string.IsNullOrWhiteSpace(value)
+            ? string.Empty
+            : value.Trim().Replace(" ", string.Empty).ToLowerInvariant();
     }
 
     private void HandleAnswer(bool isCorrect)
@@ -312,7 +314,7 @@ public class OXQuizManager : MonoBehaviour
 
             if (resultText != null)
             {
-                resultText.text = "틀렸다!";
+                resultText.text = "틀렸어요";
             }
 
             StartCoroutine(MoveSceneAfterDelay(mainSceneName));
