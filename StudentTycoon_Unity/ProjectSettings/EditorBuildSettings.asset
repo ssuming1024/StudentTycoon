@@ -30,6 +30,24 @@ EditorBuildSettings:
     path: Assets/Scenes/ScienceTest.unity
     guid: 2dbf86d3646a48a4b8fb9c51e8806d12
   - enabled: 1
+    path: Assets/Scenes/SocietyTest.unity
+    guid: d03a3bcb8f4e42d5aa001e30c884ed01
+  - enabled: 1
+    path: Assets/Scenes/ProgrammingTest.unity
+    guid: e9f49f33ca724a649b3dd8510a5dc6d1
+  - enabled: 1
+    path: Assets/Scenes/ArtTest.unity
+    guid: f266adf68f91412ea603e1ad78a19aa2
+  - enabled: 1
+    path: Assets/Scenes/MusicTest.unity
+    guid: a822b90c78d1407fa21ec6be14744ea7
+  - enabled: 1
+    path: Assets/Scenes/HealthSpaceTest.unity
+    guid: b728fe4dc8274e7f8fd341a55fe118ee
+  - enabled: 1
+    path: Assets/Scenes/KoreanTypingTest.unity
+    guid: c75cc4640d5e4f37a2414f2a2994a3a6
+  - enabled: 1
     path: Assets/Scenes/WrongAnswer.unity
     guid: abf74fcf1e4a4c5a93d7b16833d67190
   - enabled: 1

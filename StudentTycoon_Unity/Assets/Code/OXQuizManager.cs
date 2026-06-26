@@ -6,6 +6,12 @@ using System.Collections.Generic;
 
 public class OXQuizManager : MonoBehaviour
 {
+    public enum QuestionType
+    {
+        OX,
+        Input
+    }
+
     public enum Subject
     {
         Programming,
@@ -18,6 +24,36 @@ public class OXQuizManager : MonoBehaviour
         Music
     }
 
+    [System.Serializable]
+    public class QuizQuestion
+    {
+        [InspectorName("문제 종류")]
+        [Tooltip("OX 문제면 OX, 직접 글자를 입력하게 만들 문제면 Input을 고르세요.")]
+        public QuestionType questionType = QuestionType.OX;
+
+        [TextArea(2, 4)]
+        [InspectorName("문제 내용")]
+        [Tooltip("게임 화면에 보여줄 문제 문장입니다.")]
+        public string questionText;
+
+        [InspectorName("OX 정답이 O인가?")]
+        [Tooltip("OX 문제일 때만 사용합니다. O가 정답이면 체크, X가 정답이면 체크를 끄세요.")]
+        public bool oxAnswerIsO = true;
+
+        [InspectorName("입력 정답")]
+        [Tooltip("Input 문제일 때만 사용합니다. 플레이어가 입력해야 하는 정답입니다.")]
+        public string inputAnswer;
+    }
+
+    [Header("Inspector에서 직접 만들 문제")]
+    [InspectorName("아래 문제 목록 사용")]
+    [Tooltip("켜져 있으면 아래 문제 목록을 먼저 사용합니다. 목록이 비어 있으면 기존 방식 문제를 사용합니다.")]
+    [SerializeField] private bool useInspectorQuestionList = true;
+    [InspectorName("문제 목록")]
+    [Tooltip("Size를 늘린 뒤 Element를 펼쳐서 문제를 직접 추가하세요.")]
+    public List<QuizQuestion> quizQuestions = new List<QuizQuestion>();
+
+    [Header("기존 방식 문제 목록 - 비워도 됨")]
     public List<string> questionList = new List<string>();
     public List<bool> answerList = new List<bool>();
 
@@ -90,7 +126,7 @@ public class OXQuizManager : MonoBehaviour
             return;
         }
 
-        bool isCorrect = NormalizeAnswer(answerInput.text) == NormalizeAnswer(answer);
+        bool isCorrect = IsCorrectInputAnswer(answerInput.text, answer);
         HandleAnswer(isCorrect);
     }
 
@@ -107,6 +143,12 @@ public class OXQuizManager : MonoBehaviour
         if (answerInput != null)
         {
             answerInput.text = string.Empty;
+        }
+
+        if (useInspectorQuestionList && HasInspectorQuestion())
+        {
+            MakeInspectorQuestion();
+            return;
         }
 
         bool canMakeOXQuestion = HasOXQuestion();
@@ -144,6 +186,34 @@ public class OXQuizManager : MonoBehaviour
         HandleAnswer(playerAnswerIsO == correctAnswerIsO);
     }
 
+    private void MakeInspectorQuestion()
+    {
+        int questionIndex = GetRandomInspectorQuestionIndex();
+        QuizQuestion selectedQuestion = quizQuestions[questionIndex];
+
+        if (questionText != null)
+        {
+            questionText.text = selectedQuestion.questionText;
+        }
+
+        if (selectedQuestion.questionType == QuestionType.Input)
+        {
+            answer = selectedQuestion.inputAnswer;
+            SetInputMode(true);
+
+            if (answerInput != null)
+            {
+                answerInput.Select();
+                answerInput.ActivateInputField();
+            }
+        }
+        else
+        {
+            correctAnswerIsO = selectedQuestion.oxAnswerIsO;
+            SetInputMode(false);
+        }
+    }
+
     private void MakeOXQuestion()
     {
         int qIndex = GetRandomOXQuestionIndex();
@@ -176,6 +246,21 @@ public class OXQuizManager : MonoBehaviour
         }
     }
 
+    private int GetRandomInspectorQuestionIndex()
+    {
+        List<int> validIndexes = new List<int>();
+
+        for (int i = 0; i < quizQuestions.Count; i++)
+        {
+            if (IsValidInspectorQuestion(quizQuestions[i]))
+            {
+                validIndexes.Add(i);
+            }
+        }
+
+        return validIndexes[Random.Range(0, validIndexes.Count)];
+    }
+
     private int GetRandomOXQuestionIndex()
     {
         List<int> validIndexes = new List<int>();
@@ -206,6 +291,35 @@ public class OXQuizManager : MonoBehaviour
         }
 
         return validIndexes[Random.Range(0, validIndexes.Count)];
+    }
+
+    private bool HasInspectorQuestion()
+    {
+        if (quizQuestions == null)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < quizQuestions.Count; i++)
+        {
+            if (IsValidInspectorQuestion(quizQuestions[i]))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool IsValidInspectorQuestion(QuizQuestion question)
+    {
+        if (question == null || string.IsNullOrWhiteSpace(question.questionText))
+        {
+            return false;
+        }
+
+        return question.questionType == QuestionType.OX
+            || !string.IsNullOrWhiteSpace(question.inputAnswer);
     }
 
     private bool HasOXQuestion()
@@ -268,6 +382,26 @@ public class OXQuizManager : MonoBehaviour
         return string.IsNullOrWhiteSpace(value)
             ? string.Empty
             : value.Trim().Replace(" ", string.Empty).ToLowerInvariant();
+    }
+
+    private bool IsCorrectInputAnswer(string playerAnswer, string correctAnswers)
+    {
+        string normalizedPlayerAnswer = NormalizeAnswer(playerAnswer);
+        if (string.IsNullOrEmpty(normalizedPlayerAnswer))
+        {
+            return false;
+        }
+
+        string[] answers = correctAnswers.Split('/', ',', '|', ';', '\n');
+        for (int i = 0; i < answers.Length; i++)
+        {
+            if (normalizedPlayerAnswer == NormalizeAnswer(answers[i]))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void HandleAnswer(bool isCorrect)
