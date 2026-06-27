@@ -1647,6 +1647,7 @@ RectTransform:
   - {fileID: 798448009}
   - {fileID: 233682323}
   - {fileID: 3100000001}
+  - {fileID: 2122094522}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2752,6 +2753,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1524757527}
   m_CullTransparentMesh: 1
+--- !u!1 &1552512257
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1552512259}
+  - component: {fileID: 1552512258}
+  m_Layer: 0
+  m_Name: EndingTimer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1552512258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552512257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5a7d5301d2091e4fa8330f4213080d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EndingTimer
+  specialEndingScore: 100
+  passAverage: 5
+  goodEndingSceneName: Ending_1
+  badEndingSceneName: Ending_2
+  programmingEndingSceneName: ProgramingEnding
+  koreanEndingSceneName: KoreanEnding
+  mathEndingSceneName: MathEnding
+  societyEndingSceneName: SocietyEnding
+  artEndingSceneName: ArtEnding
+  scienceEndingSceneName: ScienceEnding
+  healthEndingSceneName: HealthEnding
+  musicEndingSceneName: MusicEnding
+--- !u!4 &1552512259
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552512257}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 951.37573, y: 483.96646, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1785312107
 GameObject:
   m_ObjectHideFlags: 0
@@ -2971,12 +3028,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2122094519}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -960, y: -540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1075773637}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3100000000
 GameObject:
@@ -3322,7 +3379,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -171.3}
+  m_AnchoredPosition: {x: 0, y: -166}
   m_SizeDelta: {x: 220, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3100000042
@@ -3451,6 +3508,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 191177578}
   - {fileID: 1075773637}
-  - {fileID: 2122094522}
   - {fileID: 1311273173}
   - {fileID: 498274258}
+  - {fileID: 1552512259}

@@ -18,10 +18,10 @@ EditorBuildSettings:
     path: Assets/Scenes/PlayGame.unity
     guid: f93b6d74ef17d524480e2e87409aade9
   - enabled: 1
-    path: Assets/Scenes/Ending_1.unity
+    path: Assets/Scenes/MathEnding.unity
     guid: 3751f509886f3814094d67f39c4fab47
   - enabled: 1
-    path: Assets/Scenes/Ending_2.unity
+    path: Assets/Scenes/ArtEnding.unity
     guid: 71db815aca3592d49a26fab7cb61a35c
   - enabled: 1
     path: Assets/Scenes/MathTest.unity
@@ -51,19 +51,19 @@ EditorBuildSettings:
     path: Assets/Scenes/WrongAnswer.unity
     guid: abf74fcf1e4a4c5a93d7b16833d67190
   - enabled: 1
-    path: Assets/Scenes/Ending_4.unity
+    path: Assets/Scenes/ProgramingEnding.unity
     guid: 82a51a6248f821140a8a656cfb7172fe
   - enabled: 1
-    path: Assets/Scenes/Ending_5.unity
+    path: Assets/Scenes/HelalthEnding.unity
     guid: 11d93a968fd798f4bb8762eed99c0eec
   - enabled: 1
-    path: Assets/Scenes/Ending_6.unity
+    path: Assets/Scenes/ScienceEnding.unity
     guid: 4b3863907d0a84449b0e5508b43d7bc2
   - enabled: 1
-    path: Assets/Scenes/Ending_7.unity
+    path: Assets/Scenes/SocietyEnding.unity
     guid: 510d28c6fbf8b354ebbc57524252bb83
   - enabled: 1
-    path: Assets/Scenes/Ending_8.unity
+    path: Assets/Scenes/KoreanEnding.unity
     guid: 029727f632562b54691b8851bb268f2e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
