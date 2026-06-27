@@ -1,27 +1,37 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
-public class CareerEndingJudge : MonoBehaviour
+public class TimedCareerEndingJudge : MonoBehaviour
 {
+    public static TimedCareerEndingJudge Instance;
+
+    [Header("Timer Setting")]
+    public float timeLimit = 180f; // 3분
+    public string timeText;
+
     [Header("Special Ending Threshold")]
-    public int specialEndingScore = 100;
+    public int specialEndingScore = 25;
 
     [Header("Average Ending Setting")]
-    public float passAverage = 5f;
+    public float passAverage = 10f;
 
     [Header("Normal Ending Scenes")]
-    public string goodEndingSceneName = "Ending_1";
-    public string badEndingSceneName = "Ending_2";
+    public string goodEndingSceneName = "goodEnding";
+    public string badEndingSceneName = "BadEnding";
 
     [Header("Special Career Ending Scenes")]
-    public string programmingEndingSceneName = "Ending_Programming";
-    public string koreanEndingSceneName = "Ending_Korean";
-    public string mathEndingSceneName = "Ending_Math";
-    public string societyEndingSceneName = "Ending_Society";
-    public string artEndingSceneName = "Ending_Art";
-    public string scienceEndingSceneName = "Ending_Science";
-    public string healthEndingSceneName = "Ending_BadmintonPlayer";
-    public string musicEndingSceneName = "Ending_Music";
+    public string programmingEndingSceneName = "ProgramingEnding";
+    public string koreanEndingSceneName = "KoreanEnding";
+    public string mathEndingSceneName = "MathEnding";
+    public string societyEndingSceneName = "SocietyEnding";
+    public string artEndingSceneName = "ArtEnding";
+    public string scienceEndingSceneName = "ScienceEnding";
+    public string healthEndingSceneName = "HealthEnding";
+    public string musicEndingSceneName = "MusicEnding";
+
+    private float currentTime;
+    private bool ended = false;
 
     private readonly string[] statKeys =
     {
@@ -35,8 +45,60 @@ public class CareerEndingJudge : MonoBehaviour
         "Music"
     };
 
+    private void Awake()
+    {
+        // 이미 타이머가 있으면 새로 생긴 타이머는 삭제
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
+        // 씬이 바뀌어도 타이머 오브젝트 유지
+        DontDestroyOnLoad(gameObject);
+
+        currentTime = timeLimit;
+    }
+
+    private void Start()
+    {
+        UpdateTimerText();
+        Debug.Log("[TimedCareerEndingJudge] 타이머 시작");
+    }
+
+    private void Update()
+    {
+        if (ended) return;
+
+        currentTime -= Time.deltaTime;
+
+        if (currentTime <= 0f)
+        {
+            currentTime = 0f;
+            UpdateTimerText();
+            CheckEnding();
+            return;
+        }
+
+        UpdateTimerText();
+    }
+
+    private void UpdateTimerText()
+    {
+
+        int minutes = Mathf.FloorToInt(currentTime / 60f);
+        int seconds = Mathf.FloorToInt(currentTime % 60f);
+
+        timeText = $"{minutes:00}:{seconds:00}";
+    }
+
     public void CheckEnding()
     {
+        if (ended) return;
+        ended = true;
+
         string bestSubject = "";
         int bestScore = -1;
         int total = 0;
@@ -59,31 +121,32 @@ public class CareerEndingJudge : MonoBehaviour
 
         float average = (float)total / statKeys.Length;
 
-        Debug.Log($"가장 높은 과목: {bestSubject}, 점수: {bestScore}");
+        Debug.Log($"가장 높은 과목: {bestSubject}");
+        Debug.Log($"가장 높은 점수: {bestScore}");
         Debug.Log($"평균 점수: {average}");
 
         // 1순위: 특수 진로 엔딩
         if (bestScore >= specialEndingScore)
         {
-            string specialScene = GetSpecialEndingScene(bestSubject);
+            string specialSceneName = GetSpecialEndingScene(bestSubject);
 
-            if (!string.IsNullOrEmpty(specialScene))
+            if (!string.IsNullOrEmpty(specialSceneName))
             {
-                Debug.Log($"특수 진로 엔딩 이동: {specialScene}");
-                SceneManager.LoadScene(specialScene);
+                Debug.Log($"특수 진로 엔딩 이동: {specialSceneName}");
+                SceneManager.LoadScene(specialSceneName);
                 return;
             }
         }
 
-        // 2순위: 일반 평균 엔딩
+        // 2순위: 평균 엔딩
         if (average >= passAverage)
         {
-            Debug.Log($"평균 {average}점 → 일반 좋은 엔딩");
+            Debug.Log($"평균 {average}점 → goodEnding 이동");
             SceneManager.LoadScene(goodEndingSceneName);
         }
         else
         {
-            Debug.Log($"평균 {average}점 → 일반 나쁜 엔딩");
+            Debug.Log($"평균 {average}점 → BadEnding 이동");
             SceneManager.LoadScene(badEndingSceneName);
         }
     }

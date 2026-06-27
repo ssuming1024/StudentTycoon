@@ -14,9 +14,24 @@ public class SubjectSceneButtonBinder : MonoBehaviour
     [SerializeField] private string mathSceneName = "MathTest";
     [SerializeField] private string scienceSceneName = "ScienceTest";
 
+    public TMP_Text timerText;
+    TimedCareerEndingJudge timer;
+
     private void Awake()
     {
         BindButtons();
+
+
+    }
+
+    private void Start()
+    {
+        timer = FindFirstObjectByType<TimedCareerEndingJudge>();
+    }
+
+    private void Update()
+    {
+        timerText.text = timer.timeText;
     }
 
     private void BindButtons()
