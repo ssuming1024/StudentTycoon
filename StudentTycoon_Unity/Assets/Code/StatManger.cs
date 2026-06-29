@@ -118,7 +118,7 @@ public class StatManager : MonoBehaviour
 
         if (resultText != null)
         {
-            resultText.text = GetKoreanSubjectName(subject) + " +" + addValue + "  (" + beforeStat + " → " + afterStat + ")";
+            resultText.text = GetKoreanSubjectName(subject) + " +" + addValue + "  (" + beforeStat + " -> " + afterStat + ")";
         }
 
         yield return new WaitForSeconds(0.3f);

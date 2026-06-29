@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections.Generic;
+using System.Text;
 
 public class OXQuizManager : MonoBehaviour
 {
@@ -96,6 +97,9 @@ public class OXQuizManager : MonoBehaviour
         if (answerInput != null)
         {
             answerInput.onSubmit.AddListener(_ => SubmitAnswer());
+            answerInput.onValueChanged.AddListener(value => WarmUpFont(answerInput.textComponent, value));
+            WarmUpFont(answerInput.placeholder as TMP_Text);
+            WarmUpFont(answerInput.textComponent);
         }
     }
 
@@ -158,7 +162,7 @@ public class OXQuizManager : MonoBehaviour
         {
             if (questionText != null)
             {
-                questionText.text = "문제 데이터가 없습니다.";
+                SetQuestionText("문제 데이터가 없습니다.");
             }
 
             SetInputMode(false);
@@ -193,7 +197,7 @@ public class OXQuizManager : MonoBehaviour
 
         if (questionText != null)
         {
-            questionText.text = selectedQuestion.questionText;
+            SetQuestionText(selectedQuestion.questionText);
         }
 
         if (selectedQuestion.questionType == QuestionType.Input)
@@ -220,7 +224,7 @@ public class OXQuizManager : MonoBehaviour
 
         if (questionText != null)
         {
-            questionText.text = questionList[qIndex];
+            SetQuestionText(questionList[qIndex]);
         }
 
         correctAnswerIsO = answerList[qIndex];
@@ -233,7 +237,7 @@ public class OXQuizManager : MonoBehaviour
 
         if (questionText != null)
         {
-            questionText.text = inputQuestionList[qInputIndex];
+            SetQuestionText(inputQuestionList[qInputIndex]);
         }
 
         answer = inputAnswerList[qInputIndex];
@@ -382,6 +386,51 @@ public class OXQuizManager : MonoBehaviour
         return string.IsNullOrWhiteSpace(value)
             ? string.Empty
             : value.Trim().Replace(" ", string.Empty).ToLowerInvariant();
+    }
+
+    private void SetQuestionText(string text)
+    {
+        WarmUpFont(questionText, text);
+        questionText.text = text;
+    }
+
+    private void WarmUpFont(TMP_Text targetText)
+    {
+        if (targetText != null)
+        {
+            WarmUpFont(targetText, targetText.text);
+        }
+    }
+
+    private void WarmUpFont(TMP_Text targetText, string text)
+    {
+        if (targetText == null || targetText.font == null || string.IsNullOrEmpty(text))
+        {
+            return;
+        }
+
+        targetText.font.TryAddCharacters(text, out string missingCharacters);
+        if (!string.IsNullOrEmpty(missingCharacters))
+        {
+            Debug.LogWarning("TMP font is missing characters: " + ToUnicodeList(missingCharacters));
+        }
+    }
+
+    private string ToUnicodeList(string characters)
+    {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < characters.Length; i++)
+        {
+            if (i > 0)
+            {
+                builder.Append(", ");
+            }
+
+            builder.Append("U+");
+            builder.Append(((int)characters[i]).ToString("X4"));
+        }
+
+        return builder.ToString();
     }
 
     private bool IsCorrectInputAnswer(string playerAnswer, string correctAnswers)

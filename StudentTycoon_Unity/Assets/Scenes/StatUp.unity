@@ -3600,7 +3600,7 @@ MonoBehaviour:
   m_text: "\uB2A5\uB825\uCE58 \uD0A4\uC6B0\uAE30"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 82062379cf906644a9339e147cfeb7f6, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: db5bf1a83b5043142b39b938f363af15, type: 2}
+  m_sharedMaterial: {fileID: 3751569357295454754, guid: 82062379cf906644a9339e147cfeb7f6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
